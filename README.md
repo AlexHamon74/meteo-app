@@ -45,3 +45,12 @@ Any feature requests and pull requests are welcome!
 ## License
 
 The project is under [MIT license](https://choosealicense.com/licenses/mit/).
+
+
+
+-- Faire marcher l'application de base
+    - Creer fichier .bashrc
+    - Installation de nvm
+    - Installation et urilisation de node version 16
+
+-- Changer l'Api
