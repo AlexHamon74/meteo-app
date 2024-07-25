@@ -1,14 +1,11 @@
-export const ctoF = (c) => (c * 9) / 5 + 32;
 
-export const mpsToMph = (mps) => (mps * 2.236936).toFixed(2);
-
-export const kmToMiles = (km) => (km / 1.609).toFixed(1);
-
+//Fonction pour convertir une heure en format 12 heures
 export const timeTo12HourFormat = (time) => {
   let [hours, minutes] = time.split(":");
   return `${(hours %= 12) ? hours : 12}:${minutes}`;
 };
 
+//Fonction pour convertir les degrés en direction
 export const degToCompass = (num) => {
   var val = Math.round(num / 22.5);
   var arr = [
@@ -32,6 +29,7 @@ export const degToCompass = (num) => {
   return arr[val % 16];
 };
 
+//Fonction pour obtenir l'heure locale
 export const unixToLocalTime = (unixSeconds, timezone) => {
   let time = new Date((unixSeconds + timezone) * 1000)
     .toISOString()

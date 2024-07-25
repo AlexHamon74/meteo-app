@@ -5,7 +5,6 @@ import { ContentBox } from "../components/ContentBox";
 import { Header } from "../components/Header";
 import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
-import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
 
@@ -13,7 +12,6 @@ import styles from "../styles/Home.module.css";
 
 export const App = () => {
   const [weatherData, setWeatherData] = useState();
-  const [unitSystem, setUnitSystem] = useState("metric");
 
   // Le hook userEffect permet à notre composant d'exécuter des actions après l'affichage
   useEffect(() => {
@@ -28,11 +26,6 @@ export const App = () => {
   }, []);
 
 
-  //Fonction pour changer le système d'unités entre "metric" et "imperial"
-  const changeSystem = () =>
-    unitSystem == "metric" ? setUnitSystem("imperial") : setUnitSystem("metric");
-
-
   return weatherData && !weatherData.message ? (
     //Si on a des données et si pas d'erreur alors on affiche
     
@@ -40,17 +33,13 @@ export const App = () => {
       <MainCard
         city={weatherData.city}
         country={weatherData.country}
-        // description={weatherData.weather[0].description}
-        // iconName={weatherData.weather[0].icon}
-        unitSystem={unitSystem}
         weatherData={weatherData}
       />
       <ContentBox>
         <Header>
-          <DateAndTime weatherData={weatherData} unitSystem={unitSystem} />
+          <DateAndTime weatherData={weatherData} />
         </Header>
-        <MetricsBox weatherData={weatherData} unitSystem={unitSystem} />
-        <UnitSwitch onClick={changeSystem} unitSystem={unitSystem} />
+        <MetricsBox weatherData={weatherData} />
       </ContentBox>
     </div>
 

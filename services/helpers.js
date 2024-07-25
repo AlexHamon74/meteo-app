@@ -1,39 +1,29 @@
 import {
-  unixToLocalTime,
-  kmToMiles,
-  mpsToMph,
-  timeTo12HourFormat,
+  unixToLocalTime
 } from "./converters";
 
-export const getWindSpeed = (unitSystem, windInMps) =>
-  unitSystem == "metric" ? windInMps : mpsToMph(windInMps);
+//Fonction pour obtenir la vitesse du vent en mètres par seconde
+export const getWindSpeed = (windInMps) =>
+  windInMps;
 
-export const getVisibility = (unitSystem, visibilityInMeters) =>
-  unitSystem == "metric"
-    ? (visibilityInMeters / 1000).toFixed(1)
-    : kmToMiles(visibilityInMeters / 1000);
+//Fonction pour obtenir la visibilité en kilomètres
+export const getVisibility = (visibilityInMeters) =>
+  (visibilityInMeters / 1000).toFixed(1);
 
-export const getTime = (unitSystem, currentTime, timezone) =>
-  unitSystem == "metric"
-    ? unixToLocalTime(currentTime, timezone)
-    : timeTo12HourFormat(unixToLocalTime(currentTime, timezone));
+//Fonction pour obtenir l'heure locale
+export const getTime = (currentTime, timezone) =>
+  unixToLocalTime(currentTime, timezone);
 
-export const getAMPM = (unitSystem, currentTime, timezone) =>
-  unitSystem === "imperial"
-    ? unixToLocalTime(currentTime, timezone).split(":")[0] >= 12
-      ? "PM"
-      : "AM"
-    : "";
-
+//Fonction pour obtenir le jour de la semaine en fonction des données météo
 export const getWeekDay = (weatherData) => {
   const weekday = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
   ];
   return weekday[
     new Date((weatherData.dt + weatherData.timezone) * 1000).getUTCDay()
