@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     //Gestion d'erreurs au cas où la ville n'est pas trouvée
     if (cityDetails.results.length === 0) {
       return res.status(404).json({ message: "Ville non trouvée, faites une nouvelle recherche" });
-    }
+    };
 
     //On récupère les coordonnées de la ville
     const { latitude, longitude } = cityDetails.results[0];
@@ -24,11 +24,10 @@ export default async function handler(req, res) {
     );
     const cityWeather = await getCityWeather.json();
 
-    res.status(200).json({ cityDetails, cityWeather });
+    res.status(200).json({ cityWeather });
 
   } catch (error) {
     //Gestion d'erreurs pour la requête API
     res.status(500).json({ message: "Erreur lors de la récupération des données", error: error.message });
   }
 }
-

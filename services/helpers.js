@@ -2,20 +2,14 @@ import {
   unixToLocalTime
 } from "./converters";
 
-//Fonction pour obtenir la vitesse du vent en mètres par seconde
-export const getWindSpeed = (windInMps) =>
-  windInMps;
-
 //Fonction pour obtenir la visibilité en kilomètres
-export const getVisibility = (visibilityInMeters) =>
-  (visibilityInMeters / 1000).toFixed(1);
+export const getVisibility = (visibilityInMeters) => (visibilityInMeters / 1000).toFixed(1);
 
 //Fonction pour obtenir l'heure locale
-export const getTime = (currentTime, timezone) =>
-  unixToLocalTime(currentTime, timezone);
+export const getTime = (timestamp, timezone) => unixToLocalTime(timestamp, timezone);
 
 //Fonction pour obtenir le jour de la semaine en fonction des données météo
-export const getWeekDay = (weatherData) => {
+export const getWeekDay = (timestamp) => {
   const weekday = [
     "Dimanche",
     "Lundi",
@@ -25,7 +19,6 @@ export const getWeekDay = (weatherData) => {
     "Vendredi",
     "Samedi",
   ];
-  return weekday[
-    new Date((weatherData.dt + weatherData.timezone) * 1000).getUTCDay()
-  ];
+  return weekday[new Date(timestamp * 1000).getDay()];
+
 };
