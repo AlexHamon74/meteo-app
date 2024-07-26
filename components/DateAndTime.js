@@ -1,14 +1,29 @@
-import { getWeekDay, getTime } from "../services/helpers";
+import React, { useEffect, useState } from 'react';
+
+import { getWeekDay, getCurrentTime } from "../services/helpers";
 import styles from "./DateAndTime.module.css";
 
 export const DateAndTime = ({ weatherData }) => {
 
-  const currentTime = getTime(new Date().getTime() / 1000, weatherData.cityWeather.utc_offset_seconds);
+  const [currentTime, setCurrentTime] = useState(getCurrentTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(getCurrentTime(weatherData.utc_offset_seconds));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [weatherData.utc_offset_seconds]);
+
+
 
   return (
     <div className={styles.wrapper}>
       <h2>
-        {`${getWeekDay(new Date().getTime() / 1000)}, ${currentTime}`}
+        {`${getWeekDay(weatherData)}, ${getCurrentTime(
+          weatherData.current.time,
+          weatherData.utc_offset_seconds
+        )}`}
       </h2>
     </div>
   );

@@ -19,12 +19,12 @@ export default async function handler(req, res) {
     const { latitude, longitude } = cityDetails.results[0];
 
     //On récupère les données météo grâce aux coordonnées de la ville
-    const getCityWeather = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,visibility,wind_speed_10m,wind_direction_10m,weather_code&daily=sunrise,sunset&timeformat=unixtime&timezone=auto&forecast_days=1`
+    const getWeatherData = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=relative_humidity_2m,weather_code,visibility,apparent_temperature,wind_speed_10m,temperature_2m,is_day,precipitation,rain,showers&hourly=temperature_2m,precipitation&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset&timeformat=unixtime&timezone=auto`
     );
-    const cityWeather = await getCityWeather.json();
+    const data = await getWeatherData.json();
 
-    res.status(200).json({ cityWeather });
+    res.status(200).json(data);
 
   } catch (error) {
     //Gestion d'erreurs pour la requête API

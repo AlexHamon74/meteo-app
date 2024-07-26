@@ -14,35 +14,35 @@ export const MetricsBox = ({ weatherData }) => {
       <MetricsCard
         title={"Humidity"}
         iconSrc={"/icons/humidity.png"}
-        metric={weatherData.humidity}
+        metric={weatherData.current.relative_humidity_2m}
         unit={"%"}
       />
       <MetricsCard
         title={"Wind speed"}
         iconSrc={"/icons/wind.png"}
-        metric={weatherData.windSpeed}
+        metric={weatherData.current.wind_speed_10m}
         unit={"m/s"}
       />
       <MetricsCard
         title={"Wind direction"}
         iconSrc={"/icons/compass.png"}
-        metric={degToCompass(weatherData.windDirection)}
+        metric={degToCompass(weatherData.current.wind_speed_10m)}
       />
       <MetricsCard
         title={"Visibility"}
         iconSrc={"/icons/binocular.png"}
-        metric={getVisibility(weatherData.visibility)}
+        metric={getVisibility(weatherData.current.visibility)}
         unit={"km"}
       />
       <MetricsCard
         title={"Sunrise"}
         iconSrc={"/icons/sunrise.png"}
-        metric={getTime(weatherData.sunrise)}
+        metric={getTime(weatherData.daily.sunrise[0], weatherData.utc_offset_seconds)}
       />
       <MetricsCard
         title={"Sunset"}
         iconSrc={"/icons/sunset.png"}
-        metric={getTime(weatherData.sunset,)}
+        metric={getTime(weatherData.daily.sunset[0], weatherData.utc_offset_seconds)}
       />
     </div>
   );
