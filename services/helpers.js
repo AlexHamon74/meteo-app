@@ -1,11 +1,9 @@
-import {
-  unixToLocalTime
-} from "./converters";
+import { unixToLocalTime } from "./converters";
 
 //Fonction pour obtenir la visibilité en kilomètres
 export const getVisibility = (visibilityInMeters) => (visibilityInMeters / 1000).toFixed(1);
 
-// Fonction pour obtenir l'heure locale
+//Fonction pour obtenir l'heure locale
 export const getCurrentTime = () => {
   const currentTime = new Date();
   const hours = currentTime.getHours();
@@ -15,10 +13,9 @@ export const getCurrentTime = () => {
   return `${formattedHours}:${formattedMinutes}`;
 };
 
-// Fonction qui convertit une heure Unix en heure locale
+//Fonction qui convertit une heure Unix en heure locale
 export const getTime = (currentTime, timezone) =>
   unixToLocalTime(currentTime, timezone);
-
 
 //Fonction pour obtenir le jour de la semaine en fonction des données météo
 export const getWeekDay = (weatherData) => {

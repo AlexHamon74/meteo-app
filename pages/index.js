@@ -6,7 +6,6 @@ import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
-
 import styles from "../styles/Home.module.css";
 import config from "./api/config";
 
@@ -15,6 +14,7 @@ export const App = () => {
   const [weatherData, setWeatherData] = useState();
   const { city } = config;
 
+  //Utilisation du hook useEffect pour récupérer les données météo chaque heure
   useEffect(() => {
     const getData = async () => {
       try {
@@ -30,12 +30,13 @@ export const App = () => {
       }
     };
 
+    //Mise en place de l'intervalle pour récupérer les données chaque heure
     const interval = setInterval(getData, 3600000);
     getData();
     return () => clearInterval(interval);
   }, [triggerFetch]);
 
-
+  //L'affichage
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
       <MainCard

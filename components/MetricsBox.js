@@ -1,13 +1,9 @@
 import { degToCompass } from "../services/converters";
-import {
-  getTime,
-  getVisibility,
-} from "../services/helpers";
+import { getTime, getVisibility } from "../services/helpers";
 import { MetricsCard } from "./MetricsCard";
 import styles from "./MetricsBox.module.css";
 
 export const MetricsBox = ({ weatherData }) => {
-
 
   return (
     <div className={styles.wrapper}>
