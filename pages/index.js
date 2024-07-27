@@ -6,6 +6,7 @@ import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
+import { setIconAndDesc } from "../services/getIconAndDesc";
 import styles from "../styles/Home.module.css";
 import config from "./api/config";
 
@@ -36,12 +37,25 @@ export const App = () => {
     return () => clearInterval(interval);
   }, [triggerFetch]);
 
+  //On récupère l'icone et la description selon les données météo
+  const [iconName, setIconNameState] = useState();
+  const [desc, setDescState] = useState();
+
+  useEffect(() => {
+    if (weatherData) {
+      const iconName = setIconAndDesc(weatherData);
+      setIconNameState(iconName[0]);
+      setDescState(iconName[1]);
+    }
+  }, [weatherData]);
+
   //L'affichage
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
       <MainCard
         city={city}
-        description={'desc'}
+        description={desc}
+        iconName={iconName}
         weatherData={weatherData}
       />
       <ContentBox>
